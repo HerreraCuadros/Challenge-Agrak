@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { TextInput, Button, Group, Box, Avatar, ActionIcon, Modal, Title } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { IconArrowLeft, IconTrash, IconX, IconDeviceFloppy } from '@tabler/icons-react';
@@ -30,6 +30,18 @@ export const UserForm: FC<props> = ({user}) => {
           avatar: (value) => (/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(value) ? null : 'Invalid URL')
         },
     });
+
+    useEffect(() => {
+        form.setValues({
+            id: user?.id || '',
+            createdAt: new Date(),
+            avatar: user?.avatar || '',
+            first_name: user?.first_name || '',
+            second_name: user?.second_name || '',
+            email: user?.email || ''
+        });
+    }, [user]);
+    
       
     const handleGoToHome = () => {
         goToHome();
