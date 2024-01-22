@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { User } from "../../models/user";
-import { createUser, deleteUser, updateUser } from "../../api/userApi";
-import { useNavigationPath } from ".";
 import {toast} from 'react-hot-toast';
+import { User } from "../../models/user";
+import { createUser, deleteUser, updateUser } from "../userApi";
+import { useNavigationPath } from "../../users/hooks";
 
 
 export const useMutationUser = () => {
@@ -61,7 +61,6 @@ export const useMutationUser = () => {
         onSuccess: (_, userId) =>{
             toast.success('Successfully removed');
             deleteUserQueryCache(userId);
-            // queryClient.invalidateQueries({ queryKey: ['users']});
         }
     })
 

@@ -3,7 +3,8 @@ import { TextInput, Button, Group, Box, Avatar, ActionIcon, Modal, Title } from 
 import { useForm } from '@mantine/form';
 import { IconArrowLeft, IconTrash, IconX, IconDeviceFloppy } from '@tabler/icons-react';
 import { User } from '../../models/user';
-import { useNavigationPath, useMutationUser } from '../hooks';
+import { useNavigationPath } from '../hooks';
+import { useMutationUser } from '../../api/mutations/useMutationUser';
 
 interface props {
     user?: User;
@@ -27,7 +28,9 @@ export const UserForm: FC<props> = ({user}) => {
     
         validate: {
           email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-          avatar: (value) => (/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(value) ? null : 'Invalid URL')
+          avatar: (value) => (/^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/.test(value) ? null : 'Invalid URL'),
+          first_name: (value) => (value === " ") ? null : 'Field required',
+          second_name: (value) => (value === " ") ? null : 'Field required',
         },
     });
 
@@ -75,24 +78,28 @@ export const UserForm: FC<props> = ({user}) => {
                     withAsterisk
                     label="Avatar"
                     placeholder="Image URL"
+                    required
                     {...form.getInputProps('avatar')}
                 />
                 <TextInput
                     withAsterisk
                     label="First Name"
                     placeholder="First name"
+                    required
                     {...form.getInputProps('first_name')}
                 />
                 <TextInput
                     withAsterisk
                     label="Second Name"
                     placeholder="Second name"
+                    required
                     {...form.getInputProps('second_name')}
                 />
                 <TextInput
                     withAsterisk
                     label="Email"
                     placeholder="your@email.com"
+                    required
                     {...form.getInputProps('email')}
                 />
             
@@ -108,7 +115,7 @@ export const UserForm: FC<props> = ({user}) => {
                         <IconX className='mr-1' style={{ width: '50%', height: '50%' }} stroke={1.5} />
                         Cancel
                     </Button>
-                    <Button type="submit">
+                    <Button type="submit" >
                         <IconDeviceFloppy className='mr-1' style={{ width: '50%', height: '50%' }} stroke={1.5} />
                         Save
                     </Button>

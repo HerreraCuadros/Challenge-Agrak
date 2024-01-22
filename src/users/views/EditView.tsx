@@ -1,7 +1,8 @@
+import { useGetUser } from "../../api/queries/useGetUser";
 import { User } from "../../models/user";
 import { UserForm } from "../components"
 import { useLocation, useParams } from 'react-router-dom';
-import { useGetUser, useNavigationPath } from "../hooks";
+import { useNavigationPath } from "../hooks";
 
 export const EditView = () => {
     const { goToHome } = useNavigationPath();

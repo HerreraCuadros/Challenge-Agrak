@@ -1,7 +1,9 @@
 import { User } from "../../models/user";
 import { Table, Avatar, ActionIcon, Button, Loader } from '@mantine/core';
 import { IconEdit, IconTrash, IconPlus } from '@tabler/icons-react';
-import { useNavigationPath, useMutationUser, useUsers } from "../hooks";
+import { useUsers } from "../../api/queries/useUsers";
+import { useMutationUser } from "../../api/mutations/useMutationUser";
+import { useNavigationPath } from "../hooks";
 
 
 export const UserList = () => {
